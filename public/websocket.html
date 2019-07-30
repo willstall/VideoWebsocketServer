@@ -87,6 +87,7 @@
   </script>
   </head>
   <h2>WebSocket Test</h2>
+  <button id="btn">Reset</button>
   <div id="video_container">
     <video id="video" width="240" height="240">
       <source src="test.mp4" type="video/mp4">
@@ -94,3 +95,9 @@
     </video>
   </div>
   <div id="output"></div>
+  <script type="text/javascript">
+    let b = document.getElementById("btn");
+    b.onclick = () => {
+      doSend("Play Video");
+    };
+  </script>
