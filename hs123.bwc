@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<videoWallConfiguration version="1.0">
+  <name>hs123</name>
+  <model>HS123</model>
+  <videoConnector>HDMI</videoConnector>
+  <videoMode>1920x1200x60p</videoMode>
+  <monitorOrientation>Landscape</monitorOrientation>
+  <monitorOverscan>noOverscan</monitorOverscan>
+  <measureBezelByPercent>True</measureBezelByPercent>
+  <bezelWidthPercent>0</bezelWidthPercent>
+  <bezelHeightPercent>0</bezelHeightPercent>
+  <bezelWidthMeasurement>0</bezelWidthMeasurement>
+  <bezelHeightMeasurement>0</bezelHeightMeasurement>
+  <screenWidthMeasurement>402</screenWidthMeasurement>
+  <screenHeightMeasurement>375</screenHeightMeasurement>
+  <numRows>1</numRows>
+  <numColumns>1</numColumns>
+  <ptpDomain>0</ptpDomain>
+</videoWallConfiguration>

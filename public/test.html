@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>mom</title>
+        <style>
+            body{
+                background-color:bisque;
+            }
+        </style>
+    </head>
+    <body id="body">
+        <button id="btn">TOUCH ME, PLEASE ( with consent )</button>
+        <a href="#" id="a_btn">This is an HREF to be touched!</a>
+    </body>
+    <script type = "text/javascript">
+        var test = function()
+        {
+            document.getElementById("body").style ="background-color:#FF0000";
+            alert('you clicked me');
+        };        
+        document.getElementById("btn").onclick = test;
+        document.getElementById("a_btn").onclick = test;
+        alert('loaded');
+    </script>
+</html>

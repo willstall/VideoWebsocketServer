@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
+<html>
   <head>
   <meta charset="utf-8" />
   <title>WebSocket Test</title>
@@ -9,95 +10,134 @@
       position: absolute;
       top: 0px;
       right: 0px;
+      width: 240px;
+      height: 240px;
+      border: 5px solid #FFFF00;
+      /* background-color: #EEEEEE; */
+    }
+    #video
+    {
+      backface-visibility: visible;
+    }
+    body{
+      background-color: #EEEEEE;
     }
   </style>
-  <script language="javascript" type="text/javascript">
-
-  // var wsUri = "wss://echo.websocket.org/";
-  var wsUri = "ws://"+window.location.host;
-  var output;
-  // aWss.clients.forEach(function (client) {
-  //   client.send('hello');
-  // });
-
-  function init()
-  {
-    output = document.getElementById("output");
-    testWebSocket();
-  }
-
-  function testWebSocket()
-  {
-    websocket = new WebSocket(wsUri);
-    websocket.onopen = function(evt) { onOpen(evt) };
-    websocket.onclose = function(evt) { onClose(evt) };
-    websocket.onmessage = function(evt) { onMessage(evt) };
-    websocket.onerror = function(evt) { onError(evt) };
-  }
-
-  function onOpen(evt)
-  {
-    writeToScreen("CONNECTED");
-    doSend("Connected to WebSocket. We're f*** lovely.");
-  }
-
-  function onClose(evt)
-  {
-    writeToScreen("DISCONNECTED");
-  }
-
-  function onMessage(evt)
-  {
-    writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
-
-    if(evt.data == "Play Video")
-      play();
-
-    // websocket.close();
-  }
-
-  function play()
-  {
-    let v = document.getElementById("video");
-    v.currentTime = 0;
-    v.play();
-  }
-  function onError(evt)
-  {
-    writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
-  }
-
-  function doSend(message)
-  {
-    writeToScreen("SENT: " + message);
-    websocket.send(message);
-  }
-
-  function writeToScreen(message)
-  {
-    var d = new Date();
-    var pre = document.createElement("p"); 
-    pre.style.wordWrap = "break-word";
-    pre.innerHTML =  d.getTime() + "\n" + message;
-    output.appendChild(pre);
-  }
-
-  window.addEventListener("load", init, false);
-
-  </script>
   </head>
-  <h2>WebSocket Test</h2>
-  <button id="btn">Reset</button>
-  <div id="video_container">
-    <video id="video" width="240" height="240">
-      <source src="test.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-  <div id="output"></div>
+  <body>
+    <h2>WebSocket Test</h2>
+    <button id="btn">Reset</button>
+    <div id="video_container">
+      <video id="video" width="240" height="240">
+        <source src="test_h264.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div id="output"></div>
+  
   <script type="text/javascript">
-    let b = document.getElementById("btn");
-    b.onclick = () => {
-      doSend("Play Video");
-    };
-  </script>
+    // var wsUri = "wss://echo.websocket.org/";
+    // var wsUri = "ws://"+window.location.host;
+
+    var autoReconnectInterval = 3000;
+    var wsUri = (window.location.host =="localhost:3000")?"ws://localhost:3000":"ws://10.0.1.2:3000";
+    var output;
+    // aWss.clients.forEach(function (client) {
+    //   client.send('hello');
+    // });
+
+    function init()
+    {
+      output = document.getElementById("output");
+      writeToScreen("DOCUMENT LOADED");
+      createSocketServer();
+    }
+  
+    function createSocketServer()
+    {
+      websocket = new WebSocket(wsUri);
+      websocket.onopen = function(evt) { onOpen(evt) };
+      websocket.onclose = function(evt) { onClose(evt) };
+      websocket.onmessage = function(evt) { onMessage(evt) };
+      websocket.onerror = function(evt) { onError(evt) };
+    }
+  
+    function onOpen(evt)
+    {
+      writeToScreen("CONNECTED");
+      doSend("Connected to WebSocket. We're f*** lovely.");
+    }
+  
+    function onClose(evt)
+    {
+      writeToScreen("DISCONNECTED");
+      if(evt.code != 1000)      
+			  reconnect(evt);
+    }
+  
+    function onMessage(evt)
+    {
+      writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
+      
+      switch(evt.data)
+      {
+        case "Play Video":
+          play();
+          break;
+        case "Connected to WebSocket. We're f*** lovely.":
+
+        default:
+          break;
+      }
+      // websocket.close();
+    }
+  
+    function play()
+    {
+      var v = document.getElementById("video");
+      v.currentTime = 0;
+      v.play();
+    }
+
+    function onError(evt)
+    {
+      if(evt.code == "ECONNREFUSED")
+        reconnect(evt);
+
+      writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+    }
+  
+    function doSend(message)
+    {
+      writeToScreen("SENT: " + message);
+      websocket.send(message);
+    }
+  
+    function reconnect(evt){
+      writeToScreen("RETRY RECONNECT IN..."+autoReconnectInterval);
+      setTimeout(function(){
+        writeToScreen("RECONNECTING...");
+        createSocketServer();
+      },autoReconnectInterval);
+    }
+
+    function writeToScreen(message)
+    {
+      var d = new Date();
+      var pre = document.createElement("p"); 
+      pre.style.wordWrap = "break-word";
+      pre.innerHTML =  d.getTime() + "\n" + message;
+      output.appendChild(pre);
+    }
+  
+    window.addEventListener("load", init, false);
+
+    </script>
+    <script type="text/javascript">
+      var b = document.getElementById("btn");
+      b.onclick = () => {
+        doSend("Play Video");
+      };
+    </script> 
+    </body>       
+  </html>
