@@ -8,13 +8,29 @@
     {
       display:block;
       position: absolute;
+
+      border: 5px solid #FFFF00;
+      /* background-color: #EEEEEE; */
+    }
+
+    .video_minimized
+    {
       top: 0px;
       right: 0px;
       width: 240px;
       height: 240px;
-      border: 5px solid #FFFF00;
-      /* background-color: #EEEEEE; */
     }
+
+    .video_fullscreen
+    {
+      top: 0px;
+      bottom: 0px;
+      right: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+    }
+
     #video
     {
       backface-visibility: visible;
@@ -27,7 +43,7 @@
   <body>
     <h2>WebSocket Test</h2>
     <button id="btn">Reset</button>
-    <div id="video_container">
+    <div id="video_container" class="video_minimized">
       <video id="video" width="240" height="240">
         <source src="test_h264.mp4" type="video/mp4">
         Your browser does not support the video tag.
@@ -66,8 +82,15 @@
     {
       writeToScreen("CONNECTED");
       doSend("Connected to WebSocket. We're f*** lovely.");
+      fullscreen(); 
     }
-  
+    
+    function fullscreen( minimize )
+    {
+      var v = document.getElementById("video_container");
+        // v.className = ( minimize == true ) ? ( "video_minimized" ) : ( "video_fullscreen" );
+    }
+
     function onClose(evt)
     {
       writeToScreen("DISCONNECTED");
@@ -105,6 +128,7 @@
         reconnect(evt);
 
       writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+      fullscreen(true); 
     }
   
     function doSend(message)
@@ -131,7 +155,6 @@
     }
   
     window.addEventListener("load", init, false);
-
     </script>
     <script type="text/javascript">
       var b = document.getElementById("btn");
