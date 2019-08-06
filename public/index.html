@@ -56,8 +56,12 @@
     // var wsUri = "ws://"+window.location.host;
 
     var autoReconnectInterval = 3000;
-    var wsUri = (window.location.host =="localhost:3000")?"ws://localhost:3000":"ws://10.0.1.2:3000";
+    var server_ip = "10.0.1.2:3000"
+    var wsUri = (window.location.host =="localhost:3000")?"ws://localhost:3000":"ws://"+server_ip;
     var output;
+
+    var welcomeMessage = "Connected to WebSocket. You're lovely.";
+
     // aWss.clients.forEach(function (client) {
     //   client.send('hello');
     // });
@@ -81,7 +85,7 @@
     function onOpen(evt)
     {
       writeToScreen("CONNECTED");
-      doSend("Connected to WebSocket. We're f*** lovely.");
+      doSend(welcomeMessage);
       fullscreen(); 
     }
     
@@ -107,7 +111,7 @@
         case "Play Video":
           play();
           break;
-        case "Connected to WebSocket. We're f*** lovely.":
+        case welcomeMessage:
 
         default:
           break;
