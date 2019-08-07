@@ -42,7 +42,7 @@ sudo nano /etc/dhcpcd.conf
 add this to the end of the file
 ```
 interface wlan0
-static ip_address=192.168.4.1/24
+static ip_address=10.0.1.1/24
 nohook wpa_supplicant
 ```
     
