@@ -15,10 +15,12 @@
 0) Install NPM
 - ```sudo apt-get install npm```
 0) Pull Repository
-
-0) npm install in repository directory
+- ```git clone https://github.com/willstall/VideoWebsocketServer.git```
+0) install npm dependencies in repository directory
+- ```npm install```
 0) test server with npm start
-0) create a .bash_profile at ~ to call npm start after login, can alternatively use nodemon
+- ```npm start```
+0) create a .bash_profile at ~ to call npm start after login
 
 # Steps to also use the pi as a hotspot w/ bridge
 
