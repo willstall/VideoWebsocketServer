@@ -7,17 +7,23 @@ Currently, this example sends a 'Play Video' message to all devices connected to
 ## Tested Devices
 Brightsign, iPhone, Android Phone, iPad, Windows, Mac
 
-## Brightsign Setup
-Edit the autrun.brs file in a text editor. You will need to change the line ```r=CreateObject("roRectangle",0,0,1920,1200)``` so that 1920,1200 match the desired resolution for your brightsign player.
+# Basic Local Server Setup and Test
+( with npm and git installed )
+```
+git clone https://github.com/willstall/VideoWebsocketServer.git
+npm install
+npm start
+```
+Navigate to localhost:3000 in browser to test server. You video will play within 5 seconds.
 
-# Server Setup Steps for Raspbian
+# Server Setup Steps for Raspbian on Pi
 1) Download Rasbian Lite
 1) Format sd-card as Fat-32
-1) install Rasbian Lite on sd card using [balenaEtcher](https://www.balena.io/etcher/)
-1) plug in the pi, except power
-1) put in sd card
-1) power on pi
-1) login with username:*pi* password:*raspberry*
+1) Install Rasbian Lite on sd card using [balenaEtcher](https://www.balena.io/etcher/)
+1) Plug in the pi, except power
+1) Put in sd card
+1) Power up pi
+1) Login with username:*pi* password:*raspberry*
 1) Setup Autologin, Wifi, Keyboard using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md) 
 ```
 sudo raspi-config
@@ -39,11 +45,11 @@ sudo apt-get install npm
 ```
 git clone https://github.com/willstall/VideoWebsocketServer.git
 ```
-9) install npm dependencies in repository directory
+9) Install npm dependencies in repository directory
 ```
 npm install
 ```
-10) test server with npm start
+10) Test server with npm start
 ```
 npm start
 ```
@@ -64,6 +70,14 @@ sudo service dhcpcd restart
 ```
 you can check your new ip address with ```ifconfig```
 if your ip is not 10.0.1.1, call ```reboot```
+
+# Player Setup
+Conneced to the same network as the server.
+1) Navigate to 10.0.1.1:3000 in a web-browser
+2) Alternately, you can place the contents on ```/public/``` on your device and access index.html
+
+## Brightsign Setup
+Edit the autrun.brs file in a text editor. You will need to change the line ```r=CreateObject("roRectangle",0,0,1920,1200)``` so that 1920,1200 match the desired resolution for your brightsign player.
 
 # Steps to also use the pi as a hotspot w/ bridge
 Here are two guides for setting up a raspberry pi with raspbian as a hotspot. I used a combination of these two tutorials to get everything running.
