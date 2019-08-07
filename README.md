@@ -3,9 +3,13 @@
 
 # Server Setup Steps for Raspbian
 1) Download Rasbian Lite
-2) Put Rasbian Lite onto Fat-32 Formatted sd card using balenaEtcher
-3) Boot up pi with sd-card, login with username:pi password:raspberry
-4) Setup Autologin, Wifi, Keyboard using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md) 
+1) Format sd-card as Fat-32
+1) install Rasbian Lite on sd card using [balenaEtcher](https://www.balena.io/etcher/)
+1) plug in the pi, except power
+1) put in sd card
+1) power on pi
+1) login with username:pi password:raspberry
+1) Setup Autologin, Wifi, Keyboard using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md) 
 ```
 sudo raspi-config
 ```
@@ -60,5 +64,5 @@ We will need hostapd to setup a hotspot and dnsmasq in order to give out proper 
 sudo apt install dnsmasq hostapd
 ```
 
-[try this one first](https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md)
-[try this next](https://thepi.io/how-to-use-your-raspberry-pi-as-a-wireless-access-point/)
+- [try this one first](https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md)
+- [try this next](https://thepi.io/how-to-use-your-raspberry-pi-as-a-wireless-access-point/)
