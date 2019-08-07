@@ -1,5 +1,5 @@
 # Rasbian Node Websocket Server w/ Brightsign Support
-This is an example project to help you setup a websocket server for use and install it onto a raspberry pi for use as a dedicated server. 
+This is a project to help you setup a dedicated websocket server for use on a raspberry pi that can support dynamic content on multiple devices such as phones,tablets,computers, and brightsign players using [express-ws](https://github.com/HenningM/express-ws)
 
 ## Usage
 Currently, this example sends a 'Play Video' message to all devices connected to the socket server. Any devices connected to the server will get the automatic play from the server every 5-seconds ( configurable ). Alternatively, any client can send initiat the play command that will initiate on all server clients.
