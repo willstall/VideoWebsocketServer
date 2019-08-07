@@ -86,7 +86,7 @@ Here are two guides for setting up a raspberry pi with raspbian as a hotspot. I 
 
 We will need hostapd to setup a hotspot and dnsmasq in order to give out proper ip's to clients.
 ```
-sudo apt install dnsmasq hostapd
+sudo apt-get install dnsmasq hostapd
 ```
 
 - [try this one first](https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md)
