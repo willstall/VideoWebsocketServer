@@ -5,7 +5,8 @@
 0) Download Rasbian Lite
 0) Put Rasbian Lite onto Fat-32 Formatted sd card using balenaEtcher
 0) Boot up pi with sd-card, login with username:pi password:raspberry
-0) Setup Autologin, Wifi, Keyboard using sudo [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md) 
+0) Setup Autologin, Wifi, Keyboard using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md) 
+- ``` sudo raspi-config```
 0) Update apt-get
 - ```sudo apt-get update```
 - ```sudo apt-get upgrade```
