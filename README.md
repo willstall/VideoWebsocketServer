@@ -56,8 +56,9 @@ if your ip is not 10.0.1.1, call ```reboot```
 Here are two guides for setting up a raspberry pi with raspbian as a hotspot. I used a combination of these two tutorials to get everything running.
 
 We will need hostapd to setup a hotspot and dnsmasq in order to give out proper ip's to clients.
-```sudo apt install dnsmasq hostapd```
-
+```
+sudo apt install dnsmasq hostapd
+```
 
 [try this one first](https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md)
 [try this next](https://thepi.io/how-to-use-your-raspberry-pi-as-a-wireless-access-point/)
