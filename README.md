@@ -45,7 +45,13 @@ interface wlan0
 static ip_address=10.0.1.1/24
 nohook wpa_supplicant
 ```
-    
+save file and restart dhcp
+```
+sudo service dhcpcd restart
+```
+you can check your new ip address with ```ifconfig```
+if your ip is not 10.0.1.1, call ```reboot```
+
 # Steps to also use the pi as a hotspot w/ bridge
 Here are two guides for setting up a raspberry pi with raspbian as a hotspot. I used a combination of these two tutorials to get everything running.
 
