@@ -7,12 +7,12 @@
 0) Boot up pi with sd-card, login with username:pi password:raspberry
 0) Setup Autologin, Wifi, Keyboard using sudo [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md) 
 0) Update apt-get
-sudo apt-get update
-sudo apt-get upgrade
+- ```sudo apt-get update```
+- ```sudo apt-get upgrade```
 0) Install Git
-sudo apt-get install git
+- ```sudo apt-get install git```
 0) Install NPM
-sudo apt-get install npm
+- ```sudo apt-get install npm```
 0) Pull Repository
 
 0) npm install in repository directory
