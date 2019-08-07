@@ -2,7 +2,9 @@
 This is a project to help you setup a dedicated websocket server for use on a raspberry pi that can support dynamic content on multiple devices such as phones,tablets,computers, and brightsign players using [express-ws](https://github.com/HenningM/express-ws)
 
 ## Usage
-Currently, this example sends a 'Play Video' message to all devices connected to the socket server. Any devices connected to the server will get the automatic play from the server every 5-seconds ( configurable ). Alternatively, any client can send initiat the play command that will initiate on all server clients.
+Currently, this example sends a 'Play Video' message to all devices connected to the socket server. Any devices connected to the server will get the automatic play from the server every 5-seconds ( configurable ). Alternatively, any client can initiate the play command for all devices.
+
+This is a very tiny example that can be easily expanded for use as a remote control, game,digital media signage, or any other use-case where you need to share commands among multiple devices in a clossed network.
 
 ## Tested Devices
 Brightsign, iPhone, Android Phone, iPad, Windows, Mac
