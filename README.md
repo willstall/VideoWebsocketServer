@@ -2,42 +2,44 @@
 
 
 # Server Setup Steps for Raspbian
-0) Download Rasbian Lite
-0) Put Rasbian Lite onto Fat-32 Formatted sd card using balenaEtcher
-0) Boot up pi with sd-card, login with username:pi password:raspberry
-0) Setup Autologin, Wifi, Keyboard using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md) 
+1) Download Rasbian Lite
+2) Put Rasbian Lite onto Fat-32 Formatted sd card using balenaEtcher
+3) Boot up pi with sd-card, login with username:pi password:raspberry
+4) Setup Autologin, Wifi, Keyboard using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md) 
 ```
 sudo raspi-config
 ```
-0) Update apt-get
+5) Update apt-get
 ```
 sudo apt-get update
 sudo apt-get upgrade
 ```
-0) Install Git
+6) Install Git
 ```
 sudo apt-get install git
 ```
-0) Install NPM
+7) Install NPM
 ```
 sudo apt-get install npm
 ```
-0) Pull Repository
+8) Pull Repository
 ```
 git clone https://github.com/willstall/VideoWebsocketServer.git
 ```
-0) install npm dependencies in repository directory
+9) install npm dependencies in repository directory
 ```
 npm install
 ```
-0) test server with npm start
+10) test server with npm start
 ```
 npm start
 ```
-0) create a .bash_profile at ~ to call npm start after login
-0) set a permanant ip for this device, that matches the server address in index.html
-- ```sudo nano /etc/dhcpcd.conf```
-- add this to the end of the file
+11) create a .bash_profile at ~ to call npm start after login
+12) set a permanant ip for this device, that matches the server address in index.html
+```
+sudo nano /etc/dhcpcd.conf
+```
+add this to the end of the file
 ```
 interface wlan0
 static ip_address=192.168.4.1/24
