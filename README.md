@@ -8,7 +8,7 @@
 1) plug in the pi, except power
 1) put in sd card
 1) power on pi
-1) login with username:pi password:raspberry
+1) login with username:*pi* password:*raspberry*
 1) Setup Autologin, Wifi, Keyboard using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md) 
 ```
 sudo raspi-config
