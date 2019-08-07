@@ -1,5 +1,14 @@
-# VideoWebsocketServer
+# Node Websocket Server
+This is an example project to help you setup a websocket server for use and install it onto a raspberry pi for use as a dedicated server. 
 
+## Usage
+Currently, this example sends a 'Play Video' message to all devices connected to the socket server. Any devices connected to the server will get the automatic play from the server every 5-seconds ( configurable ). Alternatively, any client can send initiat the play command that will initiate on all server clients.
+
+## Tested Devices
+Brightsign, iPhone, Android Phone, iPad, Windows, Mac
+
+## Brightsign Setup
+Edit the autrun.brs file in a text editor. You will need to change the line ```r=CreateObject("roRectangle",0,0,1920,1200)``` so that 1920,1200 match the desired resolution for your brightsign player.
 
 # Server Setup Steps for Raspbian
 1) Download Rasbian Lite
