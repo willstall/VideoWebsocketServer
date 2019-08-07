@@ -1,4 +1,4 @@
-# Node Websocket Server
+# Node Websocket Server w/ Brightsign Setup
 This is an example project to help you setup a websocket server for use and install it onto a raspberry pi for use as a dedicated server. 
 
 ## Usage
