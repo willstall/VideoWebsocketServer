@@ -6,50 +6,58 @@
   <style>
     #video_container
     {
-      display:block;
-      position: absolute;
-
-      border: 5px solid #FFFF00;
-      /* background-color: #EEEEEE; */
-    }
-
-    .video_minimized
-    {
-      top: 0px;
-      right: 0px;
-      width: 240px;
-      height: 240px;
-    }
-
-    .video_fullscreen
-    {
-      top: 0px;
-      bottom: 0px;
-      right: 0px;
-      left: 0px;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: auto;
+      overflow: hidden;
+      z-index: -100;
       width: 100%;
       height: 100%;
     }
 
     #video
     {
+      position: absolute;
       backface-visibility: visible;
     }
+
+    .video_minimized
+    {
+      top: 0;
+      right: 0;
+      width: 240;
+      height: 240px; 
+    }
+
+    .video_fullscreen
+    {
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+    }
+
     body{
       background-color: #EEEEEE;
     }
   </style>
   </head>
   <body>
-    <h2>WebSocket Test</h2>
-    <button id="btn">Reset</button>
-    <div id="video_container" class="video_minimized">
-      <video id="video" width="240" height="240" playsinline>
+    <div id="video_container">
+      <video id="video" class="video_minimized" playsinline>
         <source src="test_h264.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </div>
-    <div id="output"></div>
+    <div id="debug">
+      <h2>WebSocket Test</h2>
+      <button id="btn">Reset</button>    
+      <div id="output"></div>
+    </div>
   
   <script type="text/javascript">
     // var wsUri = "wss://echo.websocket.org/";
@@ -57,7 +65,9 @@
 
     var autoReconnectInterval = 3000;
     var server_ip = "10.0.1.1:3000"
+    var maxLog = 20;
     var wsUri = (window.location.host =="localhost:3000")?"ws://localhost:3000":"ws://"+server_ip;
+    var autoFullscreen = true;
     var output;
 
     var welcomeMessage = "Connected to WebSocket. You're lovely.";
@@ -85,14 +95,20 @@
     function onOpen(evt)
     {
       writeToScreen("CONNECTED");
-      doSend(welcomeMessage);
-      fullscreen(); 
+      doSend(welcomeMessage);    
+      fullscreen( true );   
     }
     
-    function fullscreen( minimize )
+    function fullscreen( isFullScreen )
     {
-      var v = document.getElementById("video_container");
-        // v.className = ( minimize == true ) ? ( "video_minimized" ) : ( "video_fullscreen" );
+      if(autoFullscreen != true)
+        return ;
+
+      var v = document.getElementById("video");
+        v.className = ( isFullScreen == true ) ? ( "video_fullscreen" ) : ( "video_minimized" );
+
+      var o = document.getElementById("debug");
+        o.style = ( isFullScreen == true ) ? ("display:none") : ( "" );
     }
 
     function onClose(evt)
@@ -132,7 +148,7 @@
         reconnect(evt);
 
       writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
-      fullscreen(true); 
+      fullscreen(false); 
     }
   
     function doSend(message)
@@ -151,20 +167,26 @@
 
     function writeToScreen(message)
     {
+      var count = output.childElementCount;
+      if(count > maxLog)
+        output.removeChild(output.lastChild)
+
       var d = new Date();
       var pre = document.createElement("p"); 
       pre.style.wordWrap = "break-word";
       pre.innerHTML =  d.getTime() + "\n" + message;
       output.prepend(pre);
+
+
     }
   
     window.addEventListener("load", init, false);
-    </script>
-    <script type="text/javascript">
-      var b = document.getElementById("btn");
-      b.onclick = () => {
-        doSend("Play Video");
-      };
+
+    var b = document.getElementById("btn");
+    b.onclick = () => {
+      doSend("Play Video");
+    };
+
     </script> 
     </body>       
   </html>
