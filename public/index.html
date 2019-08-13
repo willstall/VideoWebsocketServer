@@ -44,7 +44,7 @@
     <h2>WebSocket Test</h2>
     <button id="btn">Reset</button>
     <div id="video_container" class="video_minimized">
-      <video id="video" width="240" height="240">
+      <video id="video" width="240" height="240" playsinline>
         <source src="test_h264.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -155,7 +155,7 @@
       var pre = document.createElement("p"); 
       pre.style.wordWrap = "break-word";
       pre.innerHTML =  d.getTime() + "\n" + message;
-      output.appendChild(pre);
+      output.prepend(pre);
     }
   
     window.addEventListener("load", init, false);

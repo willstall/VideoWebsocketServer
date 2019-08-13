@@ -7,7 +7,7 @@ const port = 3000;
 app.use(express.static('public'));
 
 app.use(function (req, res, next) {
-  console.log('middleware');
+  // console.log('middleware');
   req.testing = 'testing';
   return next();
 });
@@ -24,13 +24,16 @@ app.ws('/', function(ws, req) {
         client.send(msg);
       });    
   });
-  console.log('socket', req.testing);
+  // console.log('socket', req.testing);
 });
 
 setInterval(function () {
     aWss.clients.forEach(function (client) {
       client.send('Play Video');
+      // console.log('Play Video');
     });
   }, 5000);
 
-app.listen(port)
+app.listen(port);
+
+console.log('Starting a lovely server!');
