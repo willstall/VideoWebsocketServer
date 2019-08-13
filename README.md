@@ -55,23 +55,31 @@ npm install
 ```
 npm start
 ```
-11) create a .bash_profile at ~ to call npm start after login
-12) set a permanant ip for this device, that matches the server address in index.html
+11) Create a .bash_profile at ~ to call npm start after login
+```
+sudo nano ~/.bash_profile
+```
+Add the following in the file and save
+```
+cd VideoWebsocketServer
+npm start
+```
+12) Set a permanant ip for this device, that matches the server address in index.html
 ```
 sudo nano /etc/dhcpcd.conf
 ```
-add this to the end of the file
+Add this to the end of the file
 ```
 interface wlan0
 static ip_address=10.0.1.1/24
 nohook wpa_supplicant
 ```
-save file and restart dhcp
+Save file and restart dhcp
 ```
 sudo service dhcpcd restart
 ```
-you can check your new ip address with ```ifconfig```
-if your ip is not 10.0.1.1, call ```reboot```
+You can check your new ip address with ```ifconfig```
+If your ip is not 10.0.1.1, call ```reboot```
 
 # Player Setup
 Conneced to the same network as the server.
