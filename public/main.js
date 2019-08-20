@@ -1,20 +1,19 @@
-
-// Define a new Movie if there is one in the query String
-var videoKeyId = 'video';
+// Video Configuration
 var initialVideo = '/video/01.mp4';
-var urlParams = new URLSearchParams(window.location.search);
-var setVideoFile = function(file){  document.getElementById('video_source').setAttribute('src',file);      }
+var autoFullscreen = true;
+var restartVideosOnConnect = true;
 
-// Socket Server Stuff
-// var wsUri = "wss://echo.websocket.org/";
-// var wsUri = "ws://"+window.location.host;
-
+// Server Configuration
 var autoReconnectInterval = 3000;
 var server_ip = "10.0.1.1:3000"
 var maxLog = 20;
+
+// Definitions
+var videoKeyId = 'video';
+var urlParams = new URLSearchParams(window.location.search);
+var setVideoFile = function(file){  document.getElementById('video_source').setAttribute('src',file);      }
 var wsUri = (window.location.host =="localhost:3000")?"ws://localhost:3000/socket":"ws://"+server_ip+"/socket";
-var autoFullscreen = true;
-var restartVideosOnConnect = true;
+
 var output;
 
 var welcomeMessage = "Connected to WebSocket. You're lovely.";
