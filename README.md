@@ -1,10 +1,15 @@
 # Rasbian Node Websocket Server w/ Brightsign Support
 This is a project to help you setup a dedicated websocket server for use on a raspberry pi that can support dynamic content on multiple devices such as phones,tablets,computers, and brightsign players using [express-ws](https://github.com/HenningM/express-ws)
 
+## Intention
+Let's say you have 7 different devices and want to sync video playbacks, create a game, or even just sync a message on the screen; this is a dirt simple solution. This implementation can be used as a self-contained video playback system w/ support for Brightsign, iOS, Android, and OSX/Win as long as the devices have local network access. *this does not require an internet connection, just a private network*
+
 ## Usage
-Currently, this example sends a 'Play Video' message to all devices connected to the socket server. Any devices connected to the server will get the automatic play from the server every 5-seconds ( configurable ). Alternatively, any client can initiate the play command for all devices.
+This example sends a 'Play Video' message to all devices connected to the socket server. Any devices connected to the server will get the automatic play from the server every 5-seconds ( configurable ). Alternatively, any client can initiate the play command for all devices.
 
 This is a very tiny example that can be easily expanded for use as a remote control, game,digital media signage, or any other use-case where you need to share commands among multiple devices in a clossed network.
+
+*I have purposely kept all code as simple as possible, so it can be adapted for your needs*
 
 ## Tested Devices
 Brightsign, iPhone, Android Phone, iPad, Windows, Mac
@@ -17,6 +22,9 @@ npm install
 npm start
 ```
 Navigate to localhost:3000 in browser to test server. You video will play within 5 seconds.
+
+# Multiple Video Files
+There is basic routing that can be found in server.js which will take any base level url and display an associate video. For instace: ```localhost:3000/01``` will play the video ```\videos\01.mp4```. For brightsign players, you must configure the ```var initialVideo = "/video/03.mp4";``` variable in your index file for each device.
 
 # Server Setup Steps for Raspbian on Pi
 1) Download Rasbian Lite
