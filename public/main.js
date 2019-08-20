@@ -79,7 +79,7 @@ function onMessage(evt)
         play();
         break;
     case welcomeMessage:
-
+        doSend("Play Video");
     default:
         break;
     }
