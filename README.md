@@ -26,6 +26,27 @@ Navigate to localhost:3000 in browser to test server. You video will play within
 # Multiple Video Files
 There is basic routing that can be found in server.js which will take any base level url and display an associate video. For instace: ```localhost:3000/01``` will play the video ```\videos\01.mp4```. For brightsign players, you must configure the ```var initialVideo = "/video/03.mp4";``` variable in your index file for each device.
 
+# Player Configuration Variables
+```
+// fullscreen video on successful player connection, turn off to see debug log
+var autoFullscreen = true;
+
+// tell all connected players to restart video on successful player connection
+var restartVideosOnConnect = true;
+
+// initial video to play if no overriding url is provided
+var initialVideo = '/video/01.mp4';
+
+// interval in milliseconds to try and resestablish a connection to the socket server
+var autoReconnectInterval = 3000;
+
+// local ip to socket server if not on localhost
+var server_ip = "10.0.1.1:3000"
+
+// line size of visual debug log
+var maxLog = 20;
+
+```
 # Server Setup Steps for Raspbian on Pi
 1) Download Rasbian Lite
 1) Format sd-card as Fat-32
