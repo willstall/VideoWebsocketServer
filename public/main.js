@@ -13,7 +13,8 @@ var autoReconnectInterval = 3000;
 var server_ip = "10.0.1.1:3000"
 var maxLog = 20;
 var wsUri = (window.location.host =="localhost:3000")?"ws://localhost:3000/socket":"ws://"+server_ip+"/socket";
-var autoFullscreen = false;
+var autoFullscreen = true;
+var restartVideosOnConnect = true;
 var output;
 
 var welcomeMessage = "Connected to WebSocket. You're lovely.";
@@ -79,7 +80,8 @@ function onMessage(evt)
         play();
         break;
     case welcomeMessage:
-        doSend("Play Video");
+        if(restartVideosOnConnect == true)
+            doSend("Play Video");
     default:
         break;
     }
