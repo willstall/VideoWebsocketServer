@@ -17,7 +17,6 @@ app.use(function (req, res, next) {
 // change any default route to a video file
 app.get('/:video',function(req,res)
 {
-  console.log(req);
   let v = {'video':'/video/' + req.params.video + '.mp4'};
   res.redirect(url.format({
     pathname:"/",
