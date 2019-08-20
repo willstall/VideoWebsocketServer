@@ -52,8 +52,9 @@
   </head>
   <body>
     <div id="video_container">
-      <video id="video" class="video_minimized" playsinline>
-        <source src="test_h264.mp4" type="video/mp4">
+      <!-- Important note, cannot play video without getting an error here if it's not muted when loading dynamically. playsinline fixes iOS playback issues-->
+      <video id="video" class="video_minimized" playsinline muted autoplay loop>    
+        <source id="video_source" src="" type="video/mp4"> 
         Your browser does not support the video tag.
       </video>
     </div>
@@ -62,135 +63,9 @@
       <button id="btn">Reset</button>    
       <div id="output"></div>
     </div>
-  
-  <script type="text/javascript">
-    // var wsUri = "wss://echo.websocket.org/";
-    // var wsUri = "ws://"+window.location.host;
-
-    var autoReconnectInterval = 3000;
-    var server_ip = "10.0.1.1:3000"
-    var maxLog = 20;
-    var wsUri = (window.location.host =="localhost:3000")?"ws://localhost:3000":"ws://"+server_ip;
-    var autoFullscreen = true;
-    var output;
-
-    var welcomeMessage = "Connected to WebSocket. You're lovely.";
-
-    // aWss.clients.forEach(function (client) {
-    //   client.send('hello');
-    // });
-
-    function init()
-    {
-      output = document.getElementById("output");
-      writeToScreen("DOCUMENT LOADED");
-      createSocketServer();
-    }
-  
-    function createSocketServer()
-    {
-      websocket = new WebSocket(wsUri);
-      websocket.onopen = function(evt) { onOpen(evt) };
-      websocket.onclose = function(evt) { onClose(evt) };
-      websocket.onmessage = function(evt) { onMessage(evt) };
-      websocket.onerror = function(evt) { onError(evt) };
-    }
-  
-    function onOpen(evt)
-    {
-      writeToScreen("CONNECTED");
-      doSend(welcomeMessage);    
-      fullscreen( true );   
-    }
-    
-    function fullscreen( isFullScreen )
-    {
-      if(autoFullscreen != true)
-        return ;
-
-      var v = document.getElementById("video");
-        v.className = ( isFullScreen == true ) ? ( "video_fullscreen" ) : ( "video_minimized" );
-
-      var o = document.getElementById("debug");
-        o.style = ( isFullScreen == true ) ? ("display:none") : ( "" );
-    }
-
-    function onClose(evt)
-    {
-      writeToScreen("DISCONNECTED");
-      if(evt.code != 1000)      
-			  reconnect(evt);
-    }
-  
-    function onMessage(evt)
-    {
-      writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
-      
-      switch(evt.data)
-      {
-        case "Play Video":
-          play();
-          break;
-        case welcomeMessage:
-
-        default:
-          break;
-      }
-      // websocket.close();
-    }
-  
-    function play()
-    {
-      var v = document.getElementById("video");
-      v.currentTime = 0;
-      v.play();
-    }
-
-    function onError(evt)
-    {
-      if(evt.code == "ECONNREFUSED")
-        reconnect(evt);
-
-      writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
-      fullscreen(false); 
-    }
-  
-    function doSend(message)
-    {
-      writeToScreen("SENT: " + message);
-      websocket.send(message);
-    }
-  
-    function reconnect(evt){
-      writeToScreen("RETRY RECONNECT IN..."+autoReconnectInterval);
-      setTimeout(function(){
-        writeToScreen("RECONNECTING...");
-        createSocketServer();
-      },autoReconnectInterval);
-    }
-
-    function writeToScreen(message)
-    {
-      var count = output.childElementCount;
-      if(count > maxLog)
-        output.removeChild(output.lastChild)
-
-      var d = new Date();
-      var pre = document.createElement("p"); 
-      pre.style.wordWrap = "break-word";
-      pre.innerHTML =  d.getTime() + "\n" + message;
-      output.prepend(pre);
-
-
-    }
-  
-    window.addEventListener("load", init, false);
-
-    var b = document.getElementById("btn");
-    b.onclick = () => {
-      doSend("Play Video");
-    };
-
-    </script> 
+    <script type="text/javascript" src="./main.js"></script>
+    <script type="text/javascript">
+        var initialVideo = "/video/01.mp4";
+    </script>
     </body>       
   </html>
