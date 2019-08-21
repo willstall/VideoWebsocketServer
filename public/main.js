@@ -1,6 +1,6 @@
 // Video Configuration
 var initialVideo = '/video/01.mp4';
-var autoFullscreen = true;
+var autoFullscreen = false;
 var restartVideosOnConnect = true;
 
 // Server Configuration
@@ -10,7 +10,6 @@ var maxLog = 20;
 
 // Definitions
 var videoKeyId = 'video';
-var urlParams = new URLSearchParams(window.location.search);
 var setVideoFile = function(file){  document.getElementById('video_source').setAttribute('src',file);      }
 var wsUri = (window.location.host =="localhost:3000")?"ws://localhost:3000/socket":"ws://"+server_ip+"/socket";
 
@@ -28,9 +27,13 @@ function init()
     // set video file
     var id = getQueryVariable(videoKeyId);
     if(id != '')
+    {
+        writeToScreen("VIDEO FILE: " + id);
         setVideoFile(id);
-    else
-        setVideoFile(initialVideo);
+    }else{
+        writeToScreen("INITIAL VIDEO FILE: " + document.getElementById('video_source').getAttribute('src'));
+        // setVideoFile(initialVideo);
+    }
 
     play();
 }
@@ -45,6 +48,7 @@ function getQueryVariable(variable) {
         }
     }
     console.log('Query variable %s not found', variable);
+    return '';
 }
 
 function createSocketServer()
@@ -140,7 +144,8 @@ function writeToScreen(message)
     var pre = document.createElement("p"); 
     pre.style.wordWrap = "break-word";
     pre.innerHTML =  d.getTime() + "\n" + message;
-    output.prepend(pre);
+    // output.prepend(pre);     // not supported on brightsign unit
+    output.insertBefore(pre,output.firstChild);
 }
 
 window.addEventListener("load", init, false);
