@@ -26,12 +26,25 @@ function init()
     createSocketServer();
 
     // set video file
-    if(urlParams.has(videoKeyId))
-        setVideoFile(urlParams.get(videoKeyId));
+    var id = getQueryVariable(videoKeyId);
+    if(id != '')
+        setVideoFile(id);
     else
         setVideoFile(initialVideo);
 
     play();
+}
+
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    console.log('Query variable %s not found', variable);
 }
 
 function createSocketServer()

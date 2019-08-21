@@ -4,7 +4,7 @@ const app = express();
 const expressWs = require('express-ws')(app);
 const aWss = expressWs.getWss('/');
 const port = 3000;
-const heartbeatInMilliseconds = 5000; //30 * 60000;
+const heartbeatInMilliseconds = 5000;
 
 app.use(express.static('public'));
 
